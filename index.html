@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UnionTeam · Ивент отдел</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0c12;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: #eef2ff;
+        }
+
+        .app {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ЛЕВАЯ ПАНЕЛЬ */
+        .sidebar {
+            width: 260px;
+            background: #0f1117;
+            border-right: 1px solid #252a35;
+            padding: 1.5rem 1rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #252a35;
+        }
+
+        .logo span {
+            background: linear-gradient(135deg, #8b5cf6, #c084fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-item {
+            padding: 0.6rem 0.8rem;
+            margin-bottom: 0.3rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: #b9c3e6;
+            transition: 0.2s;
+        }
+
+        .nav-item.active {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .nav-item:hover:not(.active) {
+            background: #1a1d2e;
+        }
+
+        .nav-category {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: #6b7280;
+            margin: 1rem 0 0.5rem 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 1.5rem 2rem;
+            max-width: calc(100% - 260px);
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff, #a78bfa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .header p {
+            color: #8b92b0;
+            margin-top: 0.3rem;
+        }
+
+        .card {
+            background: #12141c;
+            border: 1px solid #242837;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            border-color: #4f46e5;
+            background: #151824;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .info-line {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 0.8rem;
+            padding: 0.3rem 0;
+            border-bottom: 1px solid #1e212d;
+        }
+
+        .info-line:last-child {
+            border-bottom: none;
+        }
+
+        .label {
+            color: #8b92b0;
+            min-width: 85px;
+            font-weight: 500;
+        }
+
+        .value {
+            color: #eef2ff;
+            font-family: monospace;
+            font-size: 0.8rem;
+        }
+
+        .name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .role {
+            font-size: 0.7rem;
+            color: #a78bfa;
+            margin-bottom: 0.7rem;
+        }
+
+        .status {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            font-size: 0.65rem;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+        }
+
+        .status.offline {
+            background: #6e7681;
+        }
+
+        .chip-block {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1rem 0 1.5rem;
+        }
+
+        .chip {
+            background: #1e1f2c;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            border: 1px solid #2d2f3e;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 1.5rem 0 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        hr {
+            border-color: #252a35;
+            margin: 1rem 0;
+        }
+
+        .welcome-card {
+            background: linear-gradient(135deg, #1e1a3a, #0f1117);
+            border: 1px solid #4f46e5;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .welcome-card h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .welcome-card p {
+            color: #b9c3e6;
+            margin-bottom: 1rem;
+        }
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .stat-box {
+            background: #12141c;
+            padding: 1rem 1.5rem;
+            border-radius: 1rem;
+            border: 1px solid #2d2f3e;
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #a78bfa;
+        }
+
+        /* стили для формы */
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        .form-group label {
+            display: block;
+            color: #b9c3e6;
+            margin-bottom: 0.4rem;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 0.7rem;
+            background: #1e1f2c;
+            border: 1px solid #2d2f3e;
+            border-radius: 0.5rem;
+            color: white;
+            font-size: 0.9rem;
+            font-family: inherit;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #8b5cf6;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .btn-submit {
+            background: #4f46e5;
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            transition: 0.2s;
+        }
+        .btn-submit:hover {
+            background: #6d5bf6;
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .checkbox-group input {
+            width: auto;
+            transform: scale(1.2);
+        }
+        .checkbox-group label {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 800px) {
+            .app {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            .main-content {
+                max-width: 100%;
+                padding: 1rem;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="app">
+    <!-- ЛЕВАЯ ПАНЕЛЬ -->
+    <div class="sidebar">
+        <div class="logo">
+            🎮 <span>UnionTeam</span>
+        </div>
+        <div class="nav-category">ОСНОВНОЕ</div>
+        <div class="nav-item" data-page="table">📋 Таблица ивентов</div>
+        <div class="nav-item" data-page="team">👥 Команда ивента</div>
+        <div class="nav-item" data-page="add">➕ Добавить ивент</div>
+
+        <div class="nav-category">ИНФОРМАЦИЯ</div>
+        <div class="nav-item">📖 Норма</div>
+        <div class="nav-item">📚 Методичка</div>
+        <div class="nav-item">🧩 Адонны</div>
+
+        <hr>
+        <div style="font-size: 0.7rem; color: #5b5f72; margin-top: 1rem; text-align: center;">
+            Windows · активация
+        </div>
+    </div>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <div class="main-content" id="main-content">
+        <!-- сюда будет загружаться контент через JS -->
+    </div>
+</div>
+
+<script>
+    // HTML для страницы ТАБЛИЦА ИВЕНТОВ
+    const tablePage = `
+        <div class="header">
+            <h1>📋 Таблица ивентов</h1>
+            <p>Список всех проведённых и запланированных ивентов</p>
+        </div>
+
+        <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                <h3>🎉 Прошедшие ивенты</h3>
+                <div class="chip">Всего: 12</div>
+            </div>
+            <div style="margin-top: 1rem;">
+                <div class="info-line"><span class="label">🏆 Киберпанк</span><span class="value">21.04.26 · ведущий: manisule</span></div>
+                <div class="info-line"><span class="label">⚔️ Королевская битва</span><span class="value">15.04.26 · ведущий: Гербикс</span></div>
+                <div class="info-line"><span class="label">🚗 Дрифт-вечеринка</span><span class="value">08.04.26 · ведущий: Arbuz</span></div>
+                <div class="info-line"><span class="label">🔫 Стандофф</span><span class="value">01.04.26 · ведущий: Гофикал</span></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>📅 Ближайшие ивенты</h3>
+            <div style="margin-top: 1rem;">
+                <div class="info-line"><span class="label">🎃 Хэллоуин</span><span class="value">31.10.26 · ведущий: Дмитрий</span></div>
+                <div class="info-line"><span class="label">🎄 Новогодний</span><span class="value">31.12.26 · ведущий: manisule</span></div>
+            </div>
+        </div>
+
+        <div id="eventsList"></div>
+
+        <div style="margin-top: 2rem; font-size: 0.7rem; color: #5b5f72; text-align: center; border-top: 1px solid #252a35; padding-top: 1rem;">
+            ⚡ Активация Windows · перейдите в раздел "Параметры"
+        </div>
+    `;
+
+    // HTML для страницы КОМАНДА ИВЕНТА
+    const teamPage = `
+        <div class="header">
+            <h1>👥 Команда ивента</h1>
+            <p>Обычный Дарк РП 4 — состав ивент-отдела</p>
+        </div>
+
+        <div class="chip-block">
+            <div class="chip">📖 Норма</div>
+            <div class="chip">📚 Методичка</div>
+            <div class="chip">🧩 Адонны</div>
+        </div>
+
+        <div class="section-title">👑 Старший состав <span style="background:#1e1f2c; font-size:0.7rem; padding:0.1rem 0.6rem; border-radius:20px;">3 чел</span></div>
+        <div class="team-grid">
+            <div class="card">
+                <div class="name">manisule</div>
+                <div class="role">глава ивент-отдела</div>
+                <div class="status">🟢 Онлайн</div>
+                <div style="margin-top: 0.8rem;">
+                    <div class="info-line"><span class="label">DISCORD</span><span class="value">5655842339</span></div>
+                    <div class="info-line"><span class="label">STEAM ID</span><span class="value">76561198386</span></div>
+                    <div class="info-line"><span class="label">ИВЕНТОВ</span><span class="value">81280270</span></div>
+                    <div class="info-line"><span class="label">ВСТУПИЛ</span><span class="value">405573</span></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="name">Гербикс</div>
+                <div class="role">Зам.Главы ивент-отдела</div>
+                <div class="status">🟢 Онлайн</div>
+                <div style="margin-top: 0.8rem;">
+                    <div class="info-line"><span class="label">DISCORD</span><span class="value">69428697515</span></div>
+                    <div class="info-line"><span class="label">STEAM ID</span><span class="value">8583317</span></div>
+                    <div class="info-line"><span class="label">ИВЕНТОВ</span><span class="value">21.01.26</span></div>
+                    <div class="info-line"><span class="label">ВСТУПИЛ</span><span class="value">300974</span></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="name">Arbuz Madrazo</div>
+                <div class="role">Ст.Ивентер</div>
+                <div class="status">🟢 Онлайн</div>
+                <div style="margin-top: 0.8rem;">
+                    <div class="info-line"><span class="label">DISCORD</span><span class="value">10667059629</span></div>
+                    <div class="info-line"><span class="label">STEAM ID</span><span class="value">72495922</span></div>
+                    <div class="info-line"><span class="label">ИВЕНТОВ</span><span class="value">07.02.26</span></div>
+                    <div class="info-line"><span class="label">ВСТУПИЛ</span><span class="value">0</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">📋 Остальной состав</div>
+        <div class="team-grid">
+            <div class="card">
+                <div class="name">ТIRan</div>
+                <div class="role">Ивентер | Разраб Таблицы</div>
+                <div class="status offline">😴 Отпуск</div>
+                <div style="margin-top: 0.8rem;">
+                    <div class="info-line"><span class="label">DISCORD</span><span class="value">12460766214</span></div>
+                    <div class="info-line"><span class="label">STEAM ID</span><span class="value">84724320</span></div>
+                    <div class="info-line"><span class="label">ИВЕНТОВ</span><span class="value">616791</span></div>
+                    <div class="info-line"><span class="label">ВСТУПИЛ</span><span class="value">0</span></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="name">Дмитрий Морозов</div>
+                <div class="role">Ивентер</div>
+                <div class="status">🟢 Онлайн</div>
+                <div style="margin-top: 0.8rem;">
+                    <div class="info-line"><span class="label">DISCORD</span><span class="value">85974762611</span></div>
+                    <div class="info-line"><span class="label">STEAM ID</span><span class="value">50064742</span></div>
+                    <div class="info-line"><span class="label">ИВЕНТОВ</span><span class="value">14.03.26</span></div>
+                    <div class="info-line"><span class="label">ВСТУПИЛ</span><span class="value">370553</span></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="name">Гофикал</div>
+                <div class="role">Ивентер</div>
+                <div class="status">🟢 Онлайн</div>
+                <div style="margin-top: 0.8rem;">
+                    <div class="info-line"><span class="label">DISCORD</span><span class="value">11350871423</span></div>
+                    <div class="info-line"><span class="label">STEAM ID</span><span class="value">85764123</span></div>
+                    <div class="info-line"><span class="label">ИВЕНТОВ</span><span class="value">30.03.26</span></div>
+                    <div class="info-line"><span class="label">ВСТУПИЛ</span><span class="value">555608</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 2rem; font-size: 0.7rem; color: #5b5f72; text-align: center; border-top: 1px solid #252a35; padding-top: 1rem;">
+            ⚡ Активация Windows · перейдите в раздел "Параметры"
+        </div>
+    `;
+
+    // HTML для страницы ДОБАВИТЬ ИВЕНТ с полной формой
+    const addPage = `
+        <div class="header">
+            <h1>➕ Добавить ивент</h1>
+            <p>Заполните все поля для создания нового мероприятия</p>
+        </div>
+
+        <div class="card">
+            <h3 style="margin-bottom: 1.5rem;">📝 Создание нового ивента</h3>
+            <form id="eventForm">
+                <div class="form-group">
+                    <label>🎯 Название ивента *</label>
+                    <input type="text" id="eventName" placeholder="Например: Гонки на выживание" required>
+                </div>
+
+                <div class="form-group">
+                    <label>📝 Краткое описание</label>
+                    <textarea id="eventDesc" rows="3" placeholder="Опишите суть ивента, правила, особенности..."></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>⏰ Время начала</label>
+                        <input type="datetime-local" id="eventStart">
+                    </div>
+                    <div class="form-group">
+                        <label>⏰ Время окончания</label>
+                        <input type="datetime-local" id="eventEnd">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>👥 Количество участников</label>
+                        <input type="number" id="eventPlayers" placeholder="Например: 50" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label>👑 Организатор</label>
+                        <select id="eventOrganizer">
+                            <option value="">Выберите организатора</option>
+                            <option>manisule</option>
+                            <option>Гербикс</option>
+                            <option>Arbuz Madrazo</option>
+                            <option>Дмитрий Морозов</option>
+                            <option>Гофикал</option>
+                            <option>ТIRan</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>🤝 Помощники (через запятую)</label>
+                    <input type="text" id="eventHelpers" placeholder="Например: manisule, Гербикс, Arbuz">
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="hasPrizes">
+                        <label>🎁 Были призы?</label>
+                    </div>
+                </div>
+
+                <div class="form-group" id="prizesBlock" style="display: none;">
+                    <label>🏆 Какие призы?</label>
+                    <input type="text" id="eventPrizes" placeholder="Например: 5000 монет, VIP статус, скин">
+                </div>
+
+                <button type="submit" class="btn-submit">✅ Создать ивент</button>
+            </form>
+        </div>
+
+        <div id="successMessage" style="display: none;" class="card">
+            <h3 style="color: #10b981;">✅ Ивент успешно создан!</h3>
+            <p>Новое мероприятие добавлено в таблицу ивентов.</p>
+        </div>
+
+        <div style="margin-top: 2rem; font-size: 0.7rem; color: #5b5f72; text-align: center; border-top: 1px solid #252a35; padding-top: 1rem;">
+            ⚡ Активация Windows · перейдите в раздел "Параметры"
+        </div>
+    `;
+
+    // массив для хранения созданных ивентов (для таблицы)
+    let createdEvents = [];
+
+    // функция отображения списка сохранённых ивентов
+    function updateEventsTable() {
+        const eventsContainer = document.getElementById('eventsList');
+        if (!eventsContainer) return;
+        
+        if (createdEvents.length === 0) {
+            eventsContainer.innerHTML = '';
+            return;
+        }
+        
+        let html = `<div class="card"><h3>📋 Созданные ивенты</h3>`;
+        for (let i = 0; i < createdEvents.length; i++) {
+            const e = createdEvents[i];
+            html += `
+                <div style="margin-top: 1rem; padding: 0.8rem; background: #0f1117; border-radius: 0.8rem;">
+                    <div class="info-line"><span class="label">📌 Название</span><span class="value">${e.name}</span></div>
+                    <div class="info-line"><span class="label">📝 Описание</span><span class="value">${e.desc || '—'}</span></div>
+                    <div class="info-line"><span class="label">⏰ Начало</span><span class="value">${e.start || '—'}</span></div>
+                    <div class="info-line"><span class="label">⏰ Конец</span><span class="value">${e.end || '—'}</span></div>
+                    <div class="info-line"><span class="label">👥 Участников</span><span class="value">${e.players || '—'}</span></div>
+                    <div class="info-line"><span class="label">👑 Организатор</span><span class="value">${e.organizer || '—'}</span></div>
+                    <div class="info-line"><span class="label">🤝 Помощники</span><span class="value">${e.helpers || '—'}</span></div>
+                    <div class="info-line"><span class="label">🎁 Призы</span><span class="value">${e.prizes || 'Нет'}</span></div>
+                </div>
+            `;
+        }
+        html += `</div>`;
+        eventsContainer.innerHTML = html;
+    }
+
+    // сохраняем обработчик для формы после загрузки страницы "добавить ивент"
+    function bindFormHandler() {
+        const form = document.getElementById('eventForm');
+        if (!form) return;
+        
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('eventName')?.value || '';
+            if (!name) {
+                alert('Введите название ивента');
+                return;
+            }
+            
+            const desc = document.getElementById('eventDesc')?.value || '';
+            const start = document.getElementById('eventStart')?.value || '';
+            const end = document.getElementById('eventEnd')?.value || '';
+            const players = document.getElementById('eventPlayers')?.value || '';
+            const organizer = document.getElementById('eventOrganizer')?.value || '';
+            const helpers = document.getElementById('eventHelpers')?.value || '';
+            const hasPrizes = document.getElementById('hasPrizes')?.checked || false;
+            const prizes = hasPrizes ? (document.getElementById('eventPrizes')?.value || '') : '';
+            
+            const newEvent = {
+                name: name,
+                desc: desc,
+                start: start,
+                end: end,
+                players: players,
+                organizer: organizer,
+                helpers: helpers,
+                prizes: hasPrizes ? prizes : 'Нет'
+            };
+            
+            createdEvents.push(newEvent);
+            
+            // очищаем форму
+            document.getElementById('eventName').value = '';
+            document.getElementById('eventDesc').value = '';
+            document.getElementById('eventStart').value = '';
+            document.getElementById('eventEnd').value = '';
+            document.getElementById('eventPlayers').value = '';
+            document.getElementById('eventOrganizer').value = '';
+            document.getElementById('eventHelpers').value = '';
+            document.getElementById('hasPrizes').checked = false;
+            document.getElementById('prizesBlock').style.display = 'none';
+            document.getElementById('eventPrizes').value = '';
+            
+            // показываем сообщение об успехе
+            const successMsg = document.getElementById('successMessage');
+            if (successMsg) {
+                successMsg.style.display = 'block';
+                setTimeout(() => {
+                    successMsg.style.display = 'none';
+                }, 3000);
+            }
+            
+            alert(`Ивент "${name}" успешно создан!`);
+        });
+        
+        // обработка чекбокса "были призы"
+        const prizeCheckbox = document.getElementById('hasPrizes');
+        if (prizeCheckbox) {
+            prizeCheckbox.addEventListener('change', (e) => {
+                const prizesBlock = document.getElementById('prizesBlock');
+                if (prizesBlock) {
+                    prizesBlock.style.display = e.target.checked ? 'block' : 'none';
+                }
+            });
+        }
+    }
+
+    // функция переключения страниц
+    function showPage(page) {
+        const contentDiv = document.getElementById('main-content');
+        if (page === 'table') {
+            contentDiv.innerHTML = tablePage;
+            setTimeout(() => {
+                updateEventsTable();
+            }, 10);
+        } else if (page === 'team') {
+            contentDiv.innerHTML = teamPage;
+        } else if (page === 'add') {
+            contentDiv.innerHTML = addPage;
+            setTimeout(() => {
+                bindFormHandler();
+            }, 10);
+        }
+        
+        // обновляем активный класс в меню
+        document.querySelectorAll('.nav-item[data-page]').forEach(item => {
+            if (item.getAttribute('data-page') === page) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+    }
+
+    // вешаем обработчики на кнопки меню
+    document.querySelectorAll('.nav-item[data-page]').forEach(button => {
+        button.addEventListener('click', () => {
+            const page = button.getAttribute('data-page');
+            showPage(page);
+        });
+    });
+
+    // показываем страницу с таблицей ивентов по умолчанию
+    showPage('table');
+</script>
+</body>
+</html>
