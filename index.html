@@ -376,14 +376,14 @@
             const e = createdEvents[i];
             html += `
                 <div class="event-item">
-                    <div class="info-line"><span class="label">📌 Название</span><span class="value"><strong>${escapeHtml(e.name)}</strong></span></div>
-                    <div class="info-line"><span class="label">📝 Описание</span><span class="value">${escapeHtml(e.desc) || '—'}</span></div>
-                    <div class="info-line"><span class="label">⏰ Начало</span><span class="value">${escapeHtml(e.start) || '—'}</span></div>
-                    <div class="info-line"><span class="label">⏰ Конец</span><span class="value">${escapeHtml(e.end) || '—'}</span></div>
-                    <div class="info-line"><span class="label">👥 Участников</span><span class="value">${escapeHtml(e.players) || '—'}</span></div>
-                    <div class="info-line"><span class="label">👑 Организатор</span><span class="value">${escapeHtml(e.organizer) || '—'}</span></div>
-                    <div class="info-line"><span class="label">🤝 Помощники</span><span class="value">${escapeHtml(e.helpers) || '—'}</span></div>
-                    <div class="info-line"><span class="label">🎁 Призы</span><span class="value">${escapeHtml(e.prizes) || 'Нет'}</span></div>
+                    <div class="info-line"><span class="label"> Название</span><span class="value"><strong>${escapeHtml(e.name)}</strong></span></div>
+                    <div class="info-line"><span class="label"> Описание</span><span class="value">${escapeHtml(e.desc) || '—'}</span></div>
+                    <div class="info-line"><span class="label"> Начало</span><span class="value">${escapeHtml(e.start) || '—'}</span></div>
+                    <div class="info-line"><span class="label"> Конец</span><span class="value">${escapeHtml(e.end) || '—'}</span></div>
+                    <div class="info-line"><span class="label"> Участников</span><span class="value">${escapeHtml(e.players) || '—'}</span></div>
+                    <div class="info-line"><span class="label"> Организатор</span><span class="value">${escapeHtml(e.organizer) || '—'}</span></div>
+                    <div class="info-line"><span class="label"> Помощники</span><span class="value">${escapeHtml(e.helpers) || '—'}</span></div>
+                    <div class="info-line"><span class="label"> Призы</span><span class="value">${escapeHtml(e.prizes) || 'Нет'}</span></div>
                 </div>
             `;
         }
@@ -438,7 +438,7 @@
         <div class="section-title">👑 Старший состав <span style="background:#1e1f2c; font-size:0.7rem; padding:0.1rem 0.6rem; border-radius:20px;">3 чел</span></div>
         <div class="team-grid">
             <div class="card">
-                <div class="name">manisule</div>
+                <div class="name">-</div>
                 <div class="role">глава ивент-отдела</div>
                 <div class="status">🟢 Онлайн</div>
                 <div style="margin-top: 0.8rem;">
@@ -449,7 +449,7 @@
                 </div>
             </div>
             <div class="card">
-                <div class="name">Гербикс</div>
+                <div class="name">=-</div>
                 <div class="role">Зам.Главы ивент-отдела</div>
                 <div class="status">🟢 Онлайн</div>
                 <div style="margin-top: 0.8rem;">
@@ -460,7 +460,7 @@
                 </div>
             </div>
             <div class="card">
-                <div class="name">Arbuz Madrazo</div>
+                <div class="name">-</div>
                 <div class="role">Ст.Ивентер</div>
                 <div class="status">🟢 Онлайн</div>
                 <div style="margin-top: 0.8rem;">
@@ -475,7 +475,7 @@
         <div class="section-title">📋 Остальной состав</div>
         <div class="team-grid">
             <div class="card">
-                <div class="name">ТIRan</div>
+                <div class="name">-</div>
                 <div class="role">Ивентер | Разраб Таблицы</div>
                 <div class="status offline">😴 Отпуск</div>
                 <div style="margin-top: 0.8rem;">
@@ -486,7 +486,7 @@
                 </div>
             </div>
             <div class="card">
-                <div class="name">Дмитрий Морозов</div>
+                <div class="name">-</div>
                 <div class="role">Ивентер</div>
                 <div class="status">🟢 Онлайн</div>
                 <div style="margin-top: 0.8rem;">
@@ -497,7 +497,7 @@
                 </div>
             </div>
             <div class="card">
-                <div class="name">Гофикал</div>
+                <div class="name">-</div>
                 <div class="role">Ивентер</div>
                 <div class="status">🟢 Онлайн</div>
                 <div style="margin-top: 0.8rem;">
@@ -517,7 +517,7 @@
     // HTML для страницы ДОБАВИТЬ ИВЕНТ
     const addPage = `
         <div class="header">
-            <h1>➕ Добавить ивент</h1>
+            <h1> Добавить ивент</h1>
             <p>Заполните все поля для создания нового мероприятия</p>
         </div>
 
@@ -525,33 +525,33 @@
             <h3 style="margin-bottom: 1.5rem;">📝 Создание нового ивента</h3>
             <form id="eventForm">
                 <div class="form-group">
-                    <label>🎯 Название ивента *</label>
-                    <input type="text" id="eventName" placeholder="Например: Гонки на выживание" required>
+                    <label> Название ивента *</label>
+                    <input type="text" id="eventName" placeholder="Например: нападение зомби" required>
                 </div>
 
                 <div class="form-group">
-                    <label>📝 Краткое описание</label>
+                    <label> Краткое описание</label>
                     <textarea id="eventDesc" rows="3" placeholder="Опишите суть ивента, правила, особенности..."></textarea>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label>⏰ Время начала</label>
+                        <label> Время начала</label>
                         <input type="datetime-local" id="eventStart">
                     </div>
                     <div class="form-group">
-                        <label>⏰ Время окончания</label>
+                        <label> Время окончания</label>
                         <input type="datetime-local" id="eventEnd">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label>👥 Количество участников</label>
+                        <label> Количество участников</label>
                         <input type="number" id="eventPlayers" placeholder="Например: 50" min="1">
                     </div>
                     <div class="form-group">
-                        <label>👑 Организатор</label>
+                        <label> Организатор</label>
                         <select id="eventOrganizer">
                             <option value="">Выберите организатора</option>
                             <option>manisule</option>
@@ -565,19 +565,19 @@
                 </div>
 
                 <div class="form-group">
-                    <label>🤝 Помощники (через запятую)</label>
+                    <label> Помощники (через запятую)</label>
                     <input type="text" id="eventHelpers" placeholder="Например: manisule, Гербикс, Arbuz">
                 </div>
 
                 <div class="form-group">
                     <div class="checkbox-group">
                         <input type="checkbox" id="hasPrizes">
-                        <label>🎁 Были призы?</label>
+                        <label> Были призы?</label>
                     </div>
                 </div>
 
                 <div class="form-group" id="prizesBlock" style="display: none;">
-                    <label>🏆 Какие призы?</label>
+                    <label> Какие призы?</label>
                     <input type="text" id="eventPrizes" placeholder="Например: 5000 монет, VIP статус, скин">
                 </div>
 
